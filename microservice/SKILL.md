@@ -338,6 +338,6 @@ app.listen();
 
 ## Related Resources
 
-- [Microservice Documentation](../../bun-server/docs/microservice.md)
-- [Nacos Integration](../../bun-server/docs/microservice-nacos.md)
-- [Service Registry](../../bun-server/docs/microservice-service-registry.md)
+- [Microservice Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/microservice.md)
+- [Nacos Integration](https://github.com/dangaogit/bun-server/blob/main/docs/microservice-nacos.md)
+- [Service Registry](https://github.com/dangaogit/bun-server/blob/main/docs/microservice-service-registry.md)

@@ -229,4 +229,4 @@ async handleWebhook(job: WebhookPayload) {
 
 ## Related Resources
 
-- [Queue Example](../../bun-server/examples/02-official-modules/queue-app.ts)
+- [Queue Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/queue-app.ts)

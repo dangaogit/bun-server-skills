@@ -184,5 +184,5 @@ class ServiceA {
 
 ## Related Resources
 
-- [Troubleshooting: DI Not Working](../../bun-server/skills/di/injection-not-working.md)
-- [Symbol+Interface Pattern Guide](../../bun-server/docs/symbol-interface-pattern.md)
+- [Troubleshooting: DI Not Working](https://github.com/dangaogit/bun-server/blob/main/skills/di/injection-not-working.md)
+- [Symbol+Interface Pattern Guide](https://github.com/dangaogit/bun-server/blob/main/docs/symbol-interface-pattern.md)

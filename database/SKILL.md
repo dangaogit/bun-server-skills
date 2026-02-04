@@ -272,5 +272,5 @@ DatabaseModule.forRoot({
 
 ## Related Resources
 
-- [Database Example](../../bun-server/examples/02-official-modules/database-app.ts)
-- [ORM Example](../../bun-server/examples/02-official-modules/orm-app.ts)
+- [Database Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/database-app.ts)
+- [ORM Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/orm-app.ts)

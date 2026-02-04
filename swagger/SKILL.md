@@ -279,4 +279,4 @@ Bun.write("openapi.json", JSON.stringify(spec, null, 2));
 
 ## Related Resources
 
-- [API Documentation](../../bun-server/docs/api.md)
+- [API Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/api.md)

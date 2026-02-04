@@ -127,10 +127,10 @@ This skills collection covers the complete Bun Server framework including:
 
 ## Related Documentation
 
-- [Bun Server README](../bun-server/README.md)
-- [API Documentation](../bun-server/docs/api.md)
-- [Best Practices](../bun-server/docs/best-practices.md)
-- [Problem Solutions](../bun-server/skills/README.md)
+- [Bun Server README](https://github.com/dangaogit/bun-server/blob/main/README.md)
+- [API Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/api.md)
+- [Best Practices](https://github.com/dangaogit/bun-server/blob/main/docs/best-practices.md)
+- [Problem Solutions](https://github.com/dangaogit/bun-server/blob/main/skills/README.md)
 
 ## Contributing
 

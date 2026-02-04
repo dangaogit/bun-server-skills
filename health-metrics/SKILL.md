@@ -288,5 +288,5 @@ class ErrorMetricsService {
 
 ## Related Resources
 
-- [Performance Guide](../../bun-server/docs/performance.md)
-- [Deployment Guide](../../bun-server/docs/deployment.md)
+- [Performance Guide](https://github.com/dangaogit/bun-server/blob/main/docs/performance.md)
+- [Deployment Guide](https://github.com/dangaogit/bun-server/blob/main/docs/deployment.md)

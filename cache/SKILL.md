@@ -244,5 +244,5 @@ CacheModule.forRoot({
 
 ## Related Resources
 
-- [Cache Example](../../bun-server/examples/02-official-modules/cache-app.ts)
-- [Performance Guide](../../bun-server/docs/performance.md)
+- [Cache Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/cache-app.ts)
+- [Performance Guide](https://github.com/dangaogit/bun-server/blob/main/docs/performance.md)

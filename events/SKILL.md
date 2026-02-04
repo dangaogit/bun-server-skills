@@ -203,5 +203,5 @@ Ensure `initializeListeners` is called with all listener classes.
 
 ## Related Resources
 
-- [EventModule Setup Issues](../../bun-server/skills/events/event-module-setup.md)
-- [Events Documentation](../../bun-server/docs/events.md)
+- [EventModule Setup Issues](https://github.com/dangaogit/bun-server/blob/main/skills/events/event-module-setup.md)
+- [Events Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/events.md)

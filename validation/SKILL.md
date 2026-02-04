@@ -288,4 +288,4 @@ class UserController {
 ## Related Resources
 
 - [Controllers and Routing](../controller-routing/SKILL.md)
-- [Validation Documentation](../../bun-server/docs/validation.md)
+- [Validation Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/validation.md)

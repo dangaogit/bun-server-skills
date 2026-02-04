@@ -209,5 +209,5 @@ const userService = moduleRef?.container.resolve(UserService);
 
 ## Related Resources
 
-- [Event System Configuration](../../bun-server/skills/events/event-module-setup.md)
+- [Event System Configuration](https://github.com/dangaogit/bun-server/blob/main/skills/events/event-module-setup.md)
 - [Dependency Injection](../dependency-injection/SKILL.md)

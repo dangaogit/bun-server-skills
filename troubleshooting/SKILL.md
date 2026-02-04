@@ -221,6 +221,6 @@ class SharedModule {}
 
 ## Related Resources
 
-- [DI Injection Not Working](../../bun-server/skills/di/injection-not-working.md)
-- [EventModule Setup](../../bun-server/skills/events/event-module-setup.md)
-- [Troubleshooting Docs](../../bun-server/docs/troubleshooting.md)
+- [DI Injection Not Working](https://github.com/dangaogit/bun-server/blob/main/skills/di/injection-not-working.md)
+- [EventModule Setup](https://github.com/dangaogit/bun-server/blob/main/skills/events/event-module-setup.md)
+- [Troubleshooting Docs](https://github.com/dangaogit/bun-server/blob/main/docs/troubleshooting.md)

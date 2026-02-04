@@ -255,4 +255,4 @@ async function timingMiddleware(ctx: Context, next: NextFunction) {
 ## Related Resources
 
 - [Guards and Security](../security/SKILL.md)
-- [Request Lifecycle](../../bun-server/docs/request-lifecycle.md)
+- [Request Lifecycle](https://github.com/dangaogit/bun-server/blob/main/docs/request-lifecycle.md)

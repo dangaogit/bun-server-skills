@@ -244,5 +244,5 @@ getProfile(@Session() session: SessionData) {
 
 ## Related Resources
 
-- [Session Example](../../bun-server/examples/02-official-modules/session-app.ts)
+- [Session Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/session-app.ts)
 - [Security](../security/SKILL.md)

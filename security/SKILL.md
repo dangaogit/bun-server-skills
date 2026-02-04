@@ -269,5 +269,5 @@ app.use(createSecurityFilter({
 
 ## Related Resources
 
-- [Guards Documentation](../../bun-server/docs/guards.md)
-- [Auth Example](../../bun-server/examples/02-official-modules/auth-app.ts)
+- [Guards Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/guards.md)
+- [Auth Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/auth-app.ts)

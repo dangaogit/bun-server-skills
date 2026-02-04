@@ -210,4 +210,4 @@ ws.send(JSON.stringify({ type: "message", text: "Hello!" }));
 
 ## Related Resources
 
-- [WebSocket Chat Example](../../bun-server/examples/03-advanced/websocket-chat-app.ts)
+- [WebSocket Chat Example](https://github.com/dangaogit/bun-server/blob/main/examples/03-advanced/websocket-chat-app.ts)

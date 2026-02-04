@@ -330,5 +330,5 @@ throw new CodedHttpException(404, "User not found", ErrorCodes.USER_NOT_FOUND);
 
 ## Related Resources
 
-- [Error Handling Documentation](../../bun-server/docs/error-handling.md)
+- [Error Handling Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/error-handling.md)
 - [Validation](../validation/SKILL.md)
