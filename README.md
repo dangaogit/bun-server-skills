@@ -4,6 +4,12 @@ Agent skills for the Bun Server framework - a high-performance, decorator-driven
 
 ## Available Skills
 
+### Index & Best Practices
+
+| Skill | Description |
+|-------|-------------|
+| [best-practices](./best-practices/SKILL.md) | **Start here** - Index of all skills and best practices guide |
+
 ### Core Framework
 
 | Skill | Description |
@@ -76,6 +82,8 @@ Skills are automatically suggested based on keywords and context:
 ```
 bun-server-skills/
 ├── README.md
+├── best-practices/
+│   └── SKILL.md
 ├── quickstart/
 │   └── SKILL.md
 ├── dependency-injection/
