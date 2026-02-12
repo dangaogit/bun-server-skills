@@ -1,8 +1,3 @@
----
-name: bun-server-cache
-description: Caching guide for Bun Server framework. Use when implementing caching, using CacheModule, @Cacheable decorator, cache eviction, Redis cache, or improving performance.
----
-
 # Bun Server Cache
 
 ## Setup CacheModule

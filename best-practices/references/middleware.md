@@ -1,8 +1,3 @@
----
-name: bun-server-middleware
-description: Middleware and interceptor guide for Bun Server framework. Use when working with middleware pipeline, creating custom middleware, using built-in middleware (CORS, logging, rate-limit), or implementing interceptors.
----
-
 # Bun Server Middleware and Interceptors
 
 ## Middleware Basics
@@ -254,5 +249,5 @@ async function timingMiddleware(ctx: Context, next: NextFunction) {
 
 ## Related Resources
 
-- [Guards and Security](../security/SKILL.md)
+- [Guards and Security](security.md)
 - [Request Lifecycle](https://github.com/dangaogit/bun-server/blob/main/docs/request-lifecycle.md)

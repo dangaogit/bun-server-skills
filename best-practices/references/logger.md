@@ -1,8 +1,3 @@
----
-name: bun-server-logger
-description: Logging guide for Bun Server framework. Use when implementing logging, using LoggerModule, log levels, structured logging, or configuring log output.
----
-
 # Bun Server Logger
 
 ## Setup LoggerModule
@@ -265,5 +260,5 @@ logger.info("User login", { password }); // Never!
 
 ## Related Resources
 
-- [Middleware](../middleware/SKILL.md)
-- [Error Handling](../error-handling/SKILL.md)
+- [Middleware](middleware.md)
+- [Error Handling](error-handling.md)

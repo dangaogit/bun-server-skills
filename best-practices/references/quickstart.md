@@ -1,8 +1,3 @@
----
-name: bun-server-quickstart
-description: Quick start guide for Bun Server framework. Use when creating new Bun Server projects, setting up applications, configuring TypeScript, or asking about project initialization and basic setup.
----
-
 # Bun Server Quick Start
 
 ## Prerequisites
@@ -150,6 +145,6 @@ bun --cwd=packages/bun-server test
 
 ## Next Steps
 
-- [Dependency Injection](../dependency-injection/SKILL.md)
-- [Controllers and Routing](../controller-routing/SKILL.md)
-- [Module System](../module-system/SKILL.md)
+- [Dependency Injection](dependency-injection.md)
+- [Controllers and Routing](controller-routing.md)
+- [Module System](module-system.md)

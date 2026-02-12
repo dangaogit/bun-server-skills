@@ -1,8 +1,3 @@
----
-name: bun-server-microservice
-description: Microservice guide for Bun Server framework. Use when building microservices, service discovery, config center, load balancing, circuit breaker, distributed tracing, or inter-service communication.
----
-
 # Bun Server Microservice
 
 ## Config Center (Nacos)

@@ -1,8 +1,3 @@
----
-name: bun-server-module
-description: Module system guide for Bun Server framework. Use when creating modules, organizing application structure, using @Module decorator, module imports/exports, forRoot pattern, or building modular applications.
----
-
 # Bun Server Module System
 
 ## Basic Module
@@ -210,4 +205,4 @@ const userService = moduleRef?.container.resolve(UserService);
 ## Related Resources
 
 - [Event System Configuration](https://github.com/dangaogit/bun-server/blob/main/skills/events/event-module-setup.md)
-- [Dependency Injection](../dependency-injection/SKILL.md)
+- [Dependency Injection](dependency-injection.md)

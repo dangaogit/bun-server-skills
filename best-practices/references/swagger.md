@@ -1,8 +1,3 @@
----
-name: bun-server-swagger
-description: Swagger/OpenAPI documentation guide for Bun Server framework. Use when generating API docs, using SwaggerModule, API decorators (@ApiOperation, @ApiBody, @ApiResponse), or setting up Swagger UI.
----
-
 # Bun Server Swagger
 
 ## Setup SwaggerModule

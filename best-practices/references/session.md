@@ -1,8 +1,3 @@
----
-name: bun-server-session
-description: Session management guide for Bun Server framework. Use when implementing user sessions, using SessionModule, session storage, Redis sessions, or managing user state.
----
-
 # Bun Server Session
 
 ## Setup SessionModule
@@ -245,4 +240,4 @@ getProfile(@Session() session: SessionData) {
 ## Related Resources
 
 - [Session Example](https://github.com/dangaogit/bun-server/blob/main/examples/02-official-modules/session-app.ts)
-- [Security](../security/SKILL.md)
+- [Security](security.md)

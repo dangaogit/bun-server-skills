@@ -1,87 +1,43 @@
 ---
 name: bun-server-best-practices
-description: Index of all available Bun Server skills and best practices guide. Use when looking for framework guidance, discovering available skills, or asking about Bun Server capabilities and recommended patterns.
+description: MUST be used for Bun Server tasks. Covers project setup, DI, controllers, modules, middleware, validation, error handling, and all official modules. Load for any Bun Server, @dangao/bun-server, decorator-driven DI, or framework-related work. ALWAYS follow the workflow steps below.
 ---
 
-# Bun Server Skills Index & Best Practices
+# Bun Server Best Practices Workflow
 
-This skill provides an overview of all available skills for the Bun Server framework and guides you to the right resource.
+Use this skill as an instruction set. Follow the workflow in order unless the user explicitly asks for a different order.
 
-## Available Skills
+## Core Principles
 
-### Getting Started
+- **Decorator-driven architecture**: Use decorators (`@Injectable`, `@Controller`, `@Module`) as the primary configuration mechanism.
+- **Explicit dependency injection**: Keep DI contracts clear with Symbol+Interface pattern when needed.
+- **Modular organization**: Split by feature domain, one module per business boundary.
+- **Convention over configuration**: Follow established patterns for project structure and module setup.
+- **Type safety**: Leverage TypeScript decorators and typed contracts throughout.
 
-| Skill | When to Use |
-|-------|-------------|
-| [quickstart](../quickstart/SKILL.md) | New project setup, TypeScript configuration, first application |
+## 1) Confirm architecture before coding (required)
 
-### Core Framework
+- Default stack: Bun Runtime + `@dangao/bun-server` + TypeScript with decorators enabled.
+- Verify `tsconfig.json` has `experimentalDecorators: true` and `emitDecoratorMetadata: true`.
 
-| Skill | When to Use |
-|-------|-------------|
-| [dependency-injection](../dependency-injection/SKILL.md) | @Injectable, @Inject, DI scopes, Symbol+Interface pattern |
-| [controller-routing](../controller-routing/SKILL.md) | @Controller, HTTP methods, route parameters, request/response |
-| [module-system](../module-system/SKILL.md) | @Module, imports/exports, forRoot pattern, modular architecture |
-| [middleware](../middleware/SKILL.md) | Custom middleware, interceptors, CORS, rate limiting |
-| [validation](../validation/SKILL.md) | @IsString, @IsEmail, DTOs, custom validators |
-| [error-handling](../error-handling/SKILL.md) | HttpException, exception filters, error responses |
+### 1.1 Must-read core references (required)
 
-### Official Modules
+Before implementing any Bun Server task, make sure to read and apply these core references:
 
-| Skill | When to Use |
-|-------|-------------|
-| [security](../security/SKILL.md) | JWT, OAuth2, @UseGuards, @Roles, authentication |
-| [database](../database/SKILL.md) | DatabaseModule, ORM, @Entity, @Repository, @Transactional |
-| [cache](../cache/SKILL.md) | @Cacheable, @CacheEvict, Redis cache |
-| [queue](../queue/SKILL.md) | @Queue, @Cron, background jobs, scheduled tasks |
-| [session](../session/SKILL.md) | SessionModule, session storage, user state |
-| [events](../events/SKILL.md) | EventModule, @OnEvent, event-driven architecture |
-| [websocket](../websocket/SKILL.md) | @WebSocketGateway, real-time communication |
-| [swagger](../swagger/SKILL.md) | SwaggerModule, OpenAPI, @ApiOperation |
-| [health-metrics](../health-metrics/SKILL.md) | HealthModule, MetricsModule, Prometheus |
-| [logger](../logger/SKILL.md) | LoggerModule, log levels, structured logging |
+- [quickstart](references/quickstart.md) - Project setup, minimal/modular application, common imports
+- [dependency-injection](references/dependency-injection.md) - @Injectable, @Inject, scopes, Symbol+Interface pattern
+- [module-system](references/module-system.md) - @Module, imports/exports, forRoot pattern, modular architecture
 
-### Microservices
+Keep these references in active working context for the entire task.
 
-| Skill | When to Use |
-|-------|-------------|
-| [microservice](../microservice/SKILL.md) | Service discovery, config center, circuit breaker, tracing |
+### 1.2 Plan module boundaries before coding (required)
 
-### Troubleshooting
+Create a brief module map before implementation for any non-trivial feature:
 
-| Skill | When to Use |
-|-------|-------------|
-| [troubleshooting](../troubleshooting/SKILL.md) | Debugging, common errors, "not working" issues |
-
-## Quick Reference by Task
-
-### "I want to create a new project"
-→ Start with [quickstart](../quickstart/SKILL.md)
-
-### "I need to add authentication"
-→ Use [security](../security/SKILL.md) for JWT/OAuth2 and guards
-
-### "I want to validate user input"
-→ Use [validation](../validation/SKILL.md) for DTO validation
-
-### "I need to cache expensive operations"
-→ Use [cache](../cache/SKILL.md) for @Cacheable decorator
-
-### "I want to run background jobs"
-→ Use [queue](../queue/SKILL.md) for job queues and @Cron
-
-### "I need real-time features"
-→ Use [websocket](../websocket/SKILL.md) for WebSocket gateways
-
-### "I want to build microservices"
-→ Use [microservice](../microservice/SKILL.md) for service discovery and governance
-
-### "Something is not working"
-→ Check [troubleshooting](../troubleshooting/SKILL.md) for common issues
-
-## Best Practices Summary
-
-### Project Structure
+- Define each module's responsibility in one sentence.
+- Identify which modules need `forRoot()` configuration (must be called before module definitions).
+- Define provider/export contracts between modules.
+- Follow the recommended project structure:
 
 ```
 src/
@@ -101,79 +57,95 @@ src/
     └── ...
 ```
 
-### Module Configuration Order
+## 2) Apply core framework foundations (required)
 
-```typescript
-// 1. Configure global modules FIRST
-ConfigModule.forRoot({ defaultConfig: {} });
-LoggerModule.forRoot({ level: LogLevel.INFO });
-EventModule.forRoot({ wildcard: true });
+These are essential foundations. Apply all of them in every Bun Server task using the core references already loaded in section `1.1`.
 
-// 2. THEN define modules
-@Module({
-  imports: [ConfigModule, LoggerModule, EventModule],
-})
-class AppModule {}
-```
+### Dependency Injection
 
-### TypeScript Configuration (Required)
+- Must-read reference from `1.1`: [dependency-injection](references/dependency-injection.md)
+- Mark all services with `@Injectable()`.
+- Use constructor injection as the primary injection method.
+- Use Symbol+Interface pattern for abstract service contracts.
+- Choose appropriate scopes: Singleton (default), Transient, or Request-scoped.
 
-```json
-{
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  }
-}
-```
+### Controllers and Routing
 
-### Symbol + Interface Pattern
+- Must-read reference: [controller-routing](references/controller-routing.md)
+- Use `@Controller` with route prefix for grouping endpoints.
+- Use HTTP method decorators (`@GET`, `@POST`, `@PUT`, `@DELETE`) for route definitions.
+- Use parameter decorators (`@Body`, `@Query`, `@Param`, `@Header`, `@Ctx`) for request data binding.
+- Return objects directly for auto JSON serialization; use `ResponseBuilder` for special responses.
 
-```typescript
-// Define interface and Symbol with same name
-interface UserService {
-  find(id: string): Promise<User>;
-}
-const UserService = Symbol("UserService");
+### Middleware and Interceptors
 
-// Register in module
-@Module({
-  providers: [{ provide: UserService, useClass: UserServiceImpl }],
-})
+- Must-read reference: [middleware](references/middleware.md)
+- Use built-in middleware for common concerns (CORS, logging, rate limiting, static files).
+- Create custom middleware for cross-cutting concerns.
+- Use interceptors for pre/post request processing (logging, transformation, caching).
+- Follow the execution order: Global -> Controller -> Method for both middleware and interceptors.
 
-// Import as value, not type
-import { UserService } from "./user.service"; // ✅
-import type { UserService } from "./user.service"; // ❌
-```
+### Validation
+
+- Must-read reference: [validation](references/validation.md)
+- Define DTOs with validation decorators (`@IsString`, `@IsEmail`, `@Min`, etc.).
+- Use `@Validate(DtoClass)` on controller methods.
+- Use `ValidateNested` + `@Type()` for nested objects.
+- Use `PartialType()` for update DTOs.
 
 ### Error Handling
 
-```typescript
-// Use built-in exceptions
-throw new NotFoundException("User not found");
-throw new BadRequestException("Invalid input");
+- Must-read reference: [error-handling](references/error-handling.md)
+- Use built-in exceptions (`NotFoundException`, `BadRequestException`, etc.).
+- Create custom exceptions extending `HttpException` for domain-specific errors.
+- Register global exception filters for consistent error responses.
+- Async errors in handlers are automatically caught.
 
-// Or custom exceptions
-class UserNotFoundException extends HttpException {
-  constructor(id: string) {
-    super(404, `User ${id} not found`);
-  }
-}
-```
+## 3) Load official modules only when requirements call for them
 
-### Testing
+Do not add these by default. Load the matching reference only when the requirement exists.
 
-```bash
-# Run tests in package directory
-bun --cwd=packages/bun-server test
+### Authentication and Authorization
 
-# Run specific test
-bun --cwd=packages/bun-server test user.test.ts
-```
+- JWT, OAuth2, guards, roles, access control -> [security](references/security.md)
+- Session management, session stores, user state -> [session](references/session.md)
 
-## Related Resources
+### Data and Storage
 
-- [Bun Server GitHub](https://github.com/dangaogit/bun-server)
-- [API Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/api.md)
-- [Best Practices Guide](https://github.com/dangaogit/bun-server/blob/main/docs/best-practices.md)
-- [Examples](https://github.com/dangaogit/bun-server/tree/main/examples)
+- Database connections, ORM, entities, repositories, transactions -> [database](references/database.md)
+- Caching with @Cacheable, cache eviction, Redis cache -> [cache](references/cache.md)
+
+### Async Processing
+
+- Job queues, background tasks, @Cron scheduled tasks -> [queue](references/queue.md)
+- Event-driven architecture, EventModule, @OnEvent -> [events](references/events.md)
+
+### Communication
+
+- WebSocket gateways, real-time features -> [websocket](references/websocket.md)
+
+### Documentation and Observability
+
+- API documentation, OpenAPI, Swagger UI -> [swagger](references/swagger.md)
+- Health checks, Prometheus metrics, monitoring -> [health-metrics](references/health-metrics.md)
+- Logging, log levels, structured logging -> [logger](references/logger.md)
+
+## 4) Microservice extensions (only when building distributed systems)
+
+Only load when the project explicitly requires microservice architecture:
+
+- Service discovery, config center, load balancing, circuit breaker, distributed tracing -> [microservice](references/microservice.md)
+
+## 5) Final self-check before finishing
+
+- Core behavior works and matches requirements.
+- All must-read references from `1.1` were read and applied.
+- `tsconfig.json` has `experimentalDecorators` and `emitDecoratorMetadata` enabled.
+- DI contracts are explicit: `@Injectable()` on all services, proper `@Inject()` where needed.
+- Module boundaries are clear: providers registered, exports declared for cross-module usage.
+- `forRoot()` calls happen before module definitions for all configurable modules.
+- Controllers use proper parameter decorators and return typed responses.
+- Validation DTOs are defined and applied to controller methods.
+- Error handling follows framework patterns (HttpException, exception filters).
+- Optional modules are used only when requirements demand them.
+- If something is not working, check [troubleshooting](references/troubleshooting.md).

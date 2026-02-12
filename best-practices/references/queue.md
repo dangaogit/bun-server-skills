@@ -1,8 +1,3 @@
----
-name: bun-server-queue
-description: Queue and scheduled tasks guide for Bun Server framework. Use when implementing job queues, background tasks, cron jobs, @Queue decorator, @Cron decorator, or async processing.
----
-
 # Bun Server Queue
 
 ## Setup QueueModule

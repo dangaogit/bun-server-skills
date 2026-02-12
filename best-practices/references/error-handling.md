@@ -1,8 +1,3 @@
----
-name: bun-server-error-handling
-description: Error handling guide for Bun Server framework. Use when implementing error handling, using HttpException, creating custom exceptions, exception filters, or handling validation errors.
----
-
 # Bun Server Error Handling
 
 ## Built-in Exceptions
@@ -331,4 +326,4 @@ throw new CodedHttpException(404, "User not found", ErrorCodes.USER_NOT_FOUND);
 ## Related Resources
 
 - [Error Handling Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/error-handling.md)
-- [Validation](../validation/SKILL.md)
+- [Validation](validation.md)

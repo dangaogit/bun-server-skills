@@ -1,8 +1,3 @@
----
-name: bun-server-troubleshooting
-description: Troubleshooting guide for Bun Server framework. Use when debugging issues, fixing common errors, resolving DI injection failures, EventModule configuration problems, or diagnosing application startup failures.
----
-
 # Bun Server Troubleshooting
 
 ## Dependency Injection Issues

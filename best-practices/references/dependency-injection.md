@@ -1,8 +1,3 @@
----
-name: bun-server-di
-description: Dependency injection guide for Bun Server framework. Use when working with DI container, @Injectable, @Inject decorators, service registration, scopes (singleton/transient/scoped), or Symbol+Interface pattern.
----
-
 # Bun Server Dependency Injection
 
 ## Basic Usage

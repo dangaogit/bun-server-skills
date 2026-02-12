@@ -1,8 +1,3 @@
----
-name: bun-server-database
-description: Database and ORM guide for Bun Server framework. Use when connecting to databases, using DatabaseModule, creating entities, repositories, transactions, or working with SQLite/PostgreSQL/MySQL.
----
-
 # Bun Server Database
 
 ## Setup DatabaseModule

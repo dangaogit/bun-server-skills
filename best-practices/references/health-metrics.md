@@ -1,8 +1,3 @@
----
-name: bun-server-health-metrics
-description: Health checks and metrics guide for Bun Server framework. Use when implementing health endpoints, liveness/readiness probes, Prometheus metrics, application monitoring, or observability.
----
-
 # Bun Server Health & Metrics
 
 ## Health Module

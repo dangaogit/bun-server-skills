@@ -1,8 +1,3 @@
----
-name: bun-server-events
-description: Event system guide for Bun Server framework. Use when implementing event-driven architecture, using EventModule, @OnEvent decorator, event emitters, or pub/sub patterns.
----
-
 # Bun Server Event System
 
 ## Setup EventModule

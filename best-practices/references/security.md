@@ -1,8 +1,3 @@
----
-name: bun-server-security
-description: Security and authentication guide for Bun Server framework. Use when implementing authentication, authorization, JWT, OAuth2, guards, roles, or access control.
----
-
 # Bun Server Security
 
 ## Setup SecurityModule

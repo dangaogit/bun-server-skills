@@ -1,8 +1,3 @@
----
-name: bun-server-validation
-description: Data validation guide for Bun Server framework. Use when validating request data, using validation decorators (@IsString, @IsEmail, etc.), creating DTOs, custom validators, or handling validation errors.
----
-
 # Bun Server Data Validation
 
 ## Basic Usage
@@ -287,5 +282,5 @@ class UserController {
 
 ## Related Resources
 
-- [Controllers and Routing](../controller-routing/SKILL.md)
+- [Controllers and Routing](controller-routing.md)
 - [Validation Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/validation.md)

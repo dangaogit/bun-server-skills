@@ -1,8 +1,3 @@
----
-name: bun-server-controller
-description: Controller and routing guide for Bun Server framework. Use when creating controllers, defining routes, using HTTP method decorators (@GET, @POST, etc.), parameter binding (@Body, @Query, @Param), or working with request/response handling.
----
-
 # Bun Server Controllers and Routing
 
 ## Basic Controller
@@ -213,5 +208,5 @@ create(@Body() data: CreateUserDto) {
 
 ## Related Resources
 
-- [Data Validation](../validation/SKILL.md)
-- [Middleware](../middleware/SKILL.md)
+- [Data Validation](validation.md)
+- [Middleware](middleware.md)

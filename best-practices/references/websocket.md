@@ -1,8 +1,3 @@
----
-name: bun-server-websocket
-description: WebSocket guide for Bun Server framework. Use when implementing real-time features, creating WebSocket gateways, handling WebSocket connections, messages, or building chat applications.
----
-
 # Bun Server WebSocket
 
 ## Basic Gateway
