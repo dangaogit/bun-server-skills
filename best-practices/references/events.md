@@ -48,24 +48,45 @@ class NotificationListener {
 
 ## Initialize Listeners
 
-**Critical**: Must call `initializeListeners` after `registerModule`:
+Since v1.9.0, `app.listen()` automatically scans all module providers for `@OnEvent` decorators and registers them. No manual initialization is needed:
 
 ```typescript
-import { Application, EventModule, ModuleRegistry } from "@dangao/bun-server";
+import { Application } from "@dangao/bun-server";
 
 const app = new Application({ port: 3100 });
 app.registerModule(AppModule);
+app.listen(); // Automatically initializes all @OnEvent listeners
+```
 
-// Initialize event listeners
+### autoScan Options
+
+Control the auto-scan behavior via `EventModule.forRoot()`:
+
+```typescript
+EventModule.forRoot({
+  wildcard: true,
+  maxListeners: 20,
+  autoScan: true,                          // Default: true — auto-scan all module providers
+  excludeListeners: [LegacyListener],      // Exclude specific classes from auto-scan
+  includeListeners: [CriticalListener],    // Force-register specific classes (even if not in providers)
+});
+```
+
+### Manual Initialization (Advanced)
+
+For fine-grained control, you can still call `initializeListeners` explicitly after disabling auto-scan:
+
+```typescript
+EventModule.forRoot({ autoScan: false });
+
+// Then manually initialize after registerModule
 const rootModuleRef = ModuleRegistry.getInstance().getModuleRef(AppModule);
 if (rootModuleRef?.container) {
   EventModule.initializeListeners(
     rootModuleRef.container,
-    [NotificationListener, AuditListener], // All @OnEvent classes
+    [NotificationListener, AuditListener],
   );
 }
-
-app.listen();
 ```
 
 ## Emit Events
@@ -194,7 +215,12 @@ EventModule.forRoot({ wildcard: true });
 
 ### @OnEvent Not Triggering
 
-Ensure `initializeListeners` is called with all listener classes.
+Auto-scan is enabled by default. Check these common causes:
+
+1. `EventModule.forRoot()` was not called (module not configured)
+2. `autoScan` was explicitly set to `false` without manual `initializeListeners`
+3. The listener class is not registered in any module's `providers` array
+4. The listener class is in `excludeListeners`
 
 ## Related Resources
 

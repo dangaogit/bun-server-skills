@@ -60,27 +60,49 @@ Error: Provider not found for token: Symbol(@dangao/bun-server:events:emitter)
 
 ### @OnEvent Decorator Not Working
 
-**Cause**: Event listeners not initialized.
+Since v1.9.0, `app.listen()` automatically scans all module providers for `@OnEvent` decorators. Check these causes in order:
 
-**Solution**: Call `initializeListeners` after `registerModule`:
+**Cause 1**: `EventModule.forRoot()` was not called.
 
 ```typescript
-import { Application, EventModule, ModuleRegistry } from "@dangao/bun-server";
+// ❌ Wrong - missing forRoot()
+@Module({ imports: [EventModule] })
+
+// ✅ Correct
+EventModule.forRoot({ wildcard: true });
+@Module({ imports: [EventModule] })
+```
+
+**Cause 2**: The listener class is not registered in any module's `providers` array.
+
+```typescript
+// ❌ Wrong - NotificationListener not in providers
+@Module({ imports: [EventModule] })
+class AppModule {}
+
+// ✅ Correct - listener must be in providers so auto-scan can find and resolve it
+@Module({
+  imports: [EventModule],
+  providers: [NotificationListener],
+})
+class AppModule {}
+```
+
+**Cause 3**: `autoScan` was explicitly disabled. If you set `autoScan: false`, you must call `initializeListeners` manually:
+
+```typescript
+EventModule.forRoot({ autoScan: false });
 
 const app = new Application({ port: 3100 });
 app.registerModule(AppModule);
 
-// Initialize event listeners
 const rootModuleRef = ModuleRegistry.getInstance().getModuleRef(AppModule);
-if (rootModuleRef?.container) {
-  EventModule.initializeListeners(
-    rootModuleRef.container,
-    [NotificationListener, AuditListener], // All @OnEvent classes
-  );
-}
+EventModule.initializeListeners(rootModuleRef?.container, [NotificationListener]);
 
 app.listen();
 ```
+
+**Cause 4**: The listener class is listed in `excludeListeners`. Remove it from that array.
 
 ## Application Startup Issues
 
@@ -212,7 +234,7 @@ class SharedModule {}
 4. [ ] Modules using `forRoot()` are configured before definitions
 5. [ ] Services are registered in module `providers`
 6. [ ] Required services are in module `exports`
-7. [ ] Event listeners call `EventModule.initializeListeners()`
+7. [ ] Event listener classes are registered in a module's `providers` (required for auto-scan to resolve them)
 
 ## Related Resources
 

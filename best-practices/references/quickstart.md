@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Bun ≥ `1.3.3`
+- Bun ≥ `1.3.10`
 
 ## Critical Configuration
 
@@ -143,8 +143,20 @@ bun run src/main.ts
 bun --cwd=packages/bun-server test
 ```
 
+## Application Options
+
+```typescript
+const app = new Application({
+  port: 3100,                        // Default: 3000
+  gracefulShutdownTimeout: 30000,    // Graceful shutdown timeout in ms (default: 30000)
+  enableSignalHandlers: true,        // Listen for SIGTERM/SIGINT (default: true, set false in tests)
+  reusePort: false,                  // Enable SO_REUSEPORT for multi-process (Linux only)
+});
+```
+
 ## Next Steps
 
 - [Dependency Injection](dependency-injection.md)
 - [Controllers and Routing](controller-routing.md)
 - [Module System](module-system.md)
+- [Configuration](config.md)

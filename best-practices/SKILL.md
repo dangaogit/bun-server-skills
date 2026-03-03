@@ -105,6 +105,10 @@ These are essential foundations. Apply all of them in every Bun Server task usin
 
 Do not add these by default. Load the matching reference only when the requirement exists.
 
+### Configuration
+
+- Type-safe config, env vars, config files (.json/.jsonc/.json5), dynamic refresh, Nacos config center -> [config](references/config.md)
+
 ### Authentication and Authorization
 
 - JWT, OAuth2, guards, roles, access control -> [security](references/security.md)
@@ -118,7 +122,7 @@ Do not add these by default. Load the matching reference only when the requireme
 ### Async Processing
 
 - Job queues, background tasks, @Cron scheduled tasks -> [queue](references/queue.md)
-- Event-driven architecture, EventModule, @OnEvent -> [events](references/events.md)
+- Event-driven architecture, EventModule, @OnEvent (v1.9.0+: auto-scans listeners at `app.listen()`, no manual `initializeListeners` needed) -> [events](references/events.md)
 
 ### Communication
 
@@ -129,6 +133,13 @@ Do not add these by default. Load the matching reference only when the requireme
 - API documentation, OpenAPI, Swagger UI -> [swagger](references/swagger.md)
 - Health checks, Prometheus metrics, monitoring -> [health-metrics](references/health-metrics.md)
 - Logging, log levels, structured logging -> [logger](references/logger.md)
+- Embedded monitoring Web UI (routes, health, system info) -> [dashboard](references/dashboard.md)
+- HTTP request recording, debug UI, JSONL export -> [debug](references/debug.md)
+
+### Testing and Development Tools
+
+- Integration tests, module isolation, provider mocking, HTTP test client -> [testing](references/testing.md)
+- Type-safe API client generation from route manifest -> [client](references/client.md)
 
 ## 4) Microservice extensions (only when building distributed systems)
 
@@ -148,4 +159,5 @@ Only load when the project explicitly requires microservice architecture:
 - Validation DTOs are defined and applied to controller methods.
 - Error handling follows framework patterns (HttpException, exception filters).
 - Optional modules are used only when requirements demand them.
+- Event listener classes using `@OnEvent` are registered in a module's `providers` (required for auto-scan in v1.9.0+).
 - If something is not working, check [troubleshooting](references/troubleshooting.md).
