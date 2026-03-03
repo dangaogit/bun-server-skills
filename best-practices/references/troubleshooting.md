@@ -29,6 +29,23 @@ Ensure `tsconfig.json` includes:
 
 For monorepo projects, add `tsconfig.json` to root directory.
 
+For debugging with VSCode/Cursor Bun plugin, specify tsconfig explicitly in `.vscode/launch.json`:
+```json
+{
+  "type": "bun",
+  "request": "launch",
+  "name": "Debug File",
+  "program": "${file}",
+  "cwd": "${workspaceFolder}",
+  "runtimeArgs": ["--tsconfig-override", "${workspaceFolder}/tsconfig.json"]
+}
+```
+
+Or use `bunfig.toml` at the project root:
+```toml
+tsconfig = "./tsconfig.json"
+```
+
 **Workaround**: Use explicit `@Inject()`:
 ```typescript
 constructor(@Inject(UserService) private userService: UserService) {}
@@ -238,6 +255,6 @@ class SharedModule {}
 
 ## Related Resources
 
-- [DI Injection Not Working](https://github.com/dangaogit/bun-server/blob/main/skills/di/injection-not-working.md)
-- [EventModule Setup](https://github.com/dangaogit/bun-server/blob/main/skills/events/event-module-setup.md)
-- [Troubleshooting Docs](https://github.com/dangaogit/bun-server/blob/main/docs/troubleshooting.md)
+- [Events Reference](events.md)
+- [Dependency Injection Reference](dependency-injection.md)
+- [Module System Reference](module-system.md)
