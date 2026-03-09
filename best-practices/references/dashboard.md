@@ -4,6 +4,8 @@
 
 `DashboardModule` provides an embedded monitoring Web UI at `/_dashboard` (configurable). It shows application health, all registered routes, system information, and supports Markdown rendering — all with zero external dependencies.
 
+Requires Bun >= `1.3.10`.
+
 ## Setup
 
 ```typescript
@@ -61,7 +63,7 @@ class AppModule {}
 | `GET` | `/_dashboard/api/system` | System info (uptime, memory, platform, Bun version) |
 | `GET` | `/_dashboard/api/routes` | All registered routes (method, path, controller, methodName) |
 | `GET` | `/_dashboard/api/health` | Health status (integrates with HealthModule if registered) |
-| `POST` | `/_dashboard/api/markdown` | Render Markdown to HTML (uses Bun 1.3.8+ built-in parser) |
+| `POST` | `/_dashboard/api/markdown` | Render Markdown to HTML (powered by Bun built-in Markdown parser) |
 
 ### System Info Response
 
@@ -75,7 +77,7 @@ class AppModule {}
     "heapTotal": 41943040
   },
   "platform": "linux",
-  "bunVersion": "1.3.10"
+  "bunVersion": "1.3.11"
 }
 ```
 
@@ -104,7 +106,7 @@ curl -X POST http://localhost:3000/_dashboard/api/markdown \
 
 - `DashboardModule` does not require `forRoot()` options — calling `DashboardModule.forRoot()` with no arguments uses all defaults.
 - Dashboard is intended for development and internal monitoring. In production, use `auth` to restrict access.
-- Markdown rendering uses `Bun.markdown.html()` (GFM-compatible, built into Bun 1.3.8+).
+- Markdown rendering uses `Bun.markdown.html()` (GFM-compatible; introduced in Bun 1.3.8+).
 
 ## Related Resources
 

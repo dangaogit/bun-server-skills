@@ -40,6 +40,16 @@ All detailed guides are located in `best-practices/references/`:
 | [swagger](./best-practices/references/swagger.md) | API documentation, OpenAPI, Swagger UI |
 | [health-metrics](./best-practices/references/health-metrics.md) | Health checks, Prometheus metrics, monitoring |
 | [logger](./best-practices/references/logger.md) | Logging, log levels, structured logging |
+| [dashboard](./best-practices/references/dashboard.md) | Embedded monitoring dashboard UI with routes, health and system info |
+| [debug](./best-practices/references/debug.md) | Request recording, replay and debugging UI |
+| [testing](./best-practices/references/testing.md) | TestingModule, provider override, integration testing patterns |
+| [client](./best-practices/references/client.md) | Type-safe API client generation from route manifests |
+
+### AI Modules (v2.0+)
+
+| Reference | Description |
+|-----------|-------------|
+| [ai](./best-practices/references/ai.md) | AI module stack: LLM access, RAG, MCP, conversation memory, safety |
 
 ### Microservices
 
@@ -78,6 +88,11 @@ The `best-practices` skill is triggered for any Bun Server related task. It then
 - **API docs / Swagger**: swagger reference
 - **Health checks / metrics**: health-metrics reference
 - **Logging**: logger reference
+- **Dashboard / monitor UI**: dashboard reference
+- **Request replay / debug**: debug reference
+- **Testing / provider override**: testing reference
+- **Typed API client**: client reference
+- **AI modules / RAG / MCP**: ai reference
 - **Microservices**: microservice reference
 - **Debugging / errors**: troubleshooting reference
 
@@ -107,6 +122,11 @@ bun-server-skills/
         ├── swagger.md
         ├── health-metrics.md
         ├── logger.md
+        ├── dashboard.md
+        ├── debug.md
+        ├── testing.md
+        ├── client.md
+        ├── ai.md
         ├── microservice.md
         └── troubleshooting.md
 ```
@@ -116,15 +136,17 @@ bun-server-skills/
 This skills collection covers the complete Bun Server framework including:
 
 - **Core**: Application, Context, DI Container, Router, Controllers
-- **Modules**: Config, Logger, Security, Database, Cache, Queue, Session, Events, Health, Metrics, Swagger
+- **Modules**: Config, Logger, Security, Database, Cache, Queue, Session, Events, Health, Metrics, Swagger, Dashboard, Debug
+- **AI Modules (v2.0+)**: AiModule, ConversationModule, PromptModule, EmbeddingModule, VectorStoreModule, RagModule, McpModule, AiGuardModule
 - **Microservices**: Config Center, Service Registry, Service Client, Load Balancing, Circuit Breaker, Tracing
-- **Features**: Validation, WebSocket, Interceptors, Guards, Exception Filters
+- **Features**: Validation, WebSocket, Interceptors, Guards, Exception Filters, Testing Toolkit, Typed Client
 
 ## Related Documentation
 
 - [Bun Server README](https://github.com/dangaogit/bun-server/blob/main/README.md)
 - [API Documentation](https://github.com/dangaogit/bun-server/blob/main/docs/api.md)
 - [Best Practices](https://github.com/dangaogit/bun-server/blob/main/docs/best-practices.md)
+- [AI Modules](https://github.com/dangaogit/bun-server/blob/main/docs/ai.md)
 
 ## Contributing
 

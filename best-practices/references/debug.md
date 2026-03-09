@@ -4,7 +4,7 @@
 
 `DebugModule` records all HTTP requests in a ring buffer and provides an embedded Debug UI at `/_debug`. Useful during development for inspecting request/response details, timing, and replaying requests.
 
-Requires Bun 1.3.7+ (uses `Bun.JSONL.parse()` for high-performance JSONL parsing).
+Requires Bun >= `1.3.10` (the `Bun.JSONL.parse()` capability used here was introduced in Bun 1.3.7+).
 
 ## Setup
 

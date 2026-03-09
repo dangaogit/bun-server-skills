@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Bun ≥ `1.3.10`
+- Bun >= `1.3.10`
 
 ## Critical Configuration
 
@@ -160,3 +160,4 @@ const app = new Application({
 - [Controllers and Routing](controller-routing.md)
 - [Module System](module-system.md)
 - [Configuration](config.md)
+- [AI Modules (v2.0+)](ai.md)
