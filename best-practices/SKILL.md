@@ -1,6 +1,6 @@
 ---
 name: bun-server-best-practices
-description: MUST be used for Bun Server tasks. Covers project setup, DI, controllers, modules, middleware, validation, error handling, and all official modules. Load for any Bun Server, @dangao/bun-server, decorator-driven DI, or framework-related work. ALWAYS follow the workflow steps below.
+description: MUST be used for Bun Server tasks. Covers project setup, DI, controllers, modules, middleware, validation, error handling, official modules, and AI modules (v2.0+). Load for any Bun Server, @dangao/bun-server, decorator-driven DI, or framework-related work. ALWAYS follow the workflow steps below.
 ---
 
 # Bun Server Best Practices Workflow
@@ -18,6 +18,7 @@ Use this skill as an instruction set. Follow the workflow in order unless the us
 ## 1) Confirm architecture before coding (required)
 
 - Default stack: Bun Runtime + `@dangao/bun-server` + TypeScript with decorators enabled.
+- Current stable reference version: `@dangao/bun-server` `v2.0.2` (update docs/examples based on this line unless user pins another version).
 - Verify `tsconfig.json` has `experimentalDecorators: true` and `emitDecoratorMetadata: true`.
 
 ### 1.1 Must-read core references (required)
@@ -140,6 +141,11 @@ Do not add these by default. Load the matching reference only when the requireme
 
 - Integration tests, module isolation, provider mocking, HTTP test client -> [testing](references/testing.md)
 - Type-safe API client generation from route manifest -> [client](references/client.md)
+
+### AI Application Modules (v2.0+)
+
+- Unified LLM access, Tool Calling, streaming responses -> [ai](references/ai.md)
+- Includes `AiModule`, `ConversationModule`, `PromptModule`, `EmbeddingModule`, `VectorStoreModule`, `RagModule`, `McpModule`, `AiGuardModule`
 
 ## 4) Microservice extensions (only when building distributed systems)
 

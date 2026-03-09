@@ -1,5 +1,7 @@
 # Bun Server Configuration Module
 
+Requires Bun >= `1.3.10`.
+
 ## Setup ConfigModule
 
 ### Synchronous (forRoot)
@@ -47,7 +49,7 @@ ConfigModule.forRootAsync({
 });
 ```
 
-Supported file formats: `.json`, `.jsonc` (Bun 1.3.6+), `.json5` (Bun 1.3.7+).
+Supported file formats: `.json`, `.jsonc`, `.json5` (JSONC/JSON5 support was introduced in earlier Bun 1.3.x releases).
 
 Priority order: `load()` env result > `configFiles` > `defaultConfig`.
 

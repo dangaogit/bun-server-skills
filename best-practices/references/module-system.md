@@ -115,6 +115,14 @@ class AppModule {}
 | `HealthModule` | Health checks | `forRoot({})` |
 | `MetricsModule` | Metrics | `forRoot({})` |
 | `SwaggerModule` | API docs | `forRoot({ title: '...' })` |
+| `AiModule` | LLM providers and Tool Calling | `forRoot({ providers: [...] })` |
+| `ConversationModule` | Multi-turn memory | `forRoot({ store: ... })` |
+| `PromptModule` | Prompt templates | `forRoot({})` |
+| `EmbeddingModule` | Embedding generation | `forRoot({ provider: ... })` |
+| `VectorStoreModule` | Vector retrieval | `forRoot({ store: ... })` |
+| `RagModule` | RAG pipeline | `forRoot({ collection: 'kb' })` |
+| `McpModule` | MCP server | `forRoot({ transport: 'sse', path: '/mcp' })` |
+| `AiGuardModule` | AI safety checks | `forRoot({ piiDetection: {...} })` |
 
 ## Modular Application Structure
 
