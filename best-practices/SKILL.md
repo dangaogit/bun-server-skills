@@ -1,6 +1,6 @@
 ---
 name: bun-server-best-practices
-description: MUST be used for Bun Server tasks. Covers project setup, DI, controllers, modules, middleware, validation, error handling, official modules, and AI modules (v2.0+). Load for any Bun Server, @dangao/bun-server, decorator-driven DI, or framework-related work. ALWAYS follow the workflow steps below.
+description: MUST be used for Bun Server tasks. Covers project setup, DI, controllers, modules, middleware, validation, error handling, official modules, Platform Adapter (v3.0+), and AI modules (v2.0+). Load for any Bun Server, @dangao/bun-server, decorator-driven DI, or framework-related work. ALWAYS follow the workflow steps below.
 ---
 
 # Bun Server Best Practices Workflow
@@ -14,11 +14,12 @@ Use this skill as an instruction set. Follow the workflow in order unless the us
 - **Modular organization**: Split by feature domain, one module per business boundary.
 - **Convention over configuration**: Follow established patterns for project structure and module setup.
 - **Type safety**: Leverage TypeScript decorators and typed contracts throughout.
+- **Platform portability**: Use `IWebSocket<T>` and `IServerHandle` (not Bun-specific types) to keep code runnable on both Bun and Node.js 22+.
 
 ## 1) Confirm architecture before coding (required)
 
 - Default stack: Bun Runtime + `@dangao/bun-server` + TypeScript with decorators enabled.
-- Current stable reference version: `@dangao/bun-server` `v2.0.2` (update docs/examples based on this line unless user pins another version).
+- Current stable reference version: `@dangao/bun-server` `v3.0.5` (update docs/examples based on this line unless user pins another version).
 - Verify `tsconfig.json` has `experimentalDecorators: true` and `emitDecoratorMetadata: true`.
 
 ### 1.1 Must-read core references (required)
@@ -28,6 +29,7 @@ Before implementing any Bun Server task, make sure to read and apply these core 
 - [quickstart](references/quickstart.md) - Project setup, minimal/modular application, common imports
 - [dependency-injection](references/dependency-injection.md) - @Injectable, @Inject, scopes, Symbol+Interface pattern
 - [module-system](references/module-system.md) - @Module, imports/exports, forRoot pattern, modular architecture
+- [platform](references/platform.md) - **v3 required**: Platform Adapter, `IWebSocket<T>`, `IServerHandle`, Bun vs Node.js support matrix
 
 Keep these references in active working context for the entire task.
 
@@ -86,6 +88,15 @@ These are essential foundations. Apply all of them in every Bun Server task usin
 - Use interceptors for pre/post request processing (logging, transformation, caching).
 - Follow the execution order: Global -> Controller -> Method for both middleware and interceptors.
 
+### Guards
+
+- Must-read reference: [guards](references/guards.md)
+- Implement `CanActivate` for access control (authentication, authorization, feature flags).
+- Use `@UseGuards()` at controller or method level.
+- Use built-in `AuthGuard`, `OptionalAuthGuard`, `RolesGuard` + `@Roles()` when possible.
+- Use `Reflector` + metadata for dynamic guard logic.
+- Prefer throwing `UnauthorizedException` / `ForbiddenException` over returning `false`.
+
 ### Validation
 
 - Must-read reference: [validation](references/validation.md)
@@ -109,6 +120,7 @@ Do not add these by default. Load the matching reference only when the requireme
 ### Configuration
 
 - Type-safe config, env vars, config files (.json/.jsonc/.json5), dynamic refresh, Nacos config center -> [config](references/config.md)
+- Async config loading from remote sources -> [async-module](references/async-module.md)
 
 ### Authentication and Authorization
 
@@ -118,6 +130,7 @@ Do not add these by default. Load the matching reference only when the requireme
 ### Data and Storage
 
 - Database connections, ORM, entities, repositories, transactions -> [database](references/database.md)
+- Async DB config from ConfigService or secrets -> [async-module](references/async-module.md)
 - Caching with @Cacheable, cache eviction, Redis cache -> [cache](references/cache.md)
 
 ### Async Processing
@@ -141,6 +154,15 @@ Do not add these by default. Load the matching reference only when the requireme
 
 - Integration tests, module isolation, provider mocking, HTTP test client -> [testing](references/testing.md)
 - Type-safe API client generation from route manifest -> [client](references/client.md)
+
+### Lifecycle Management
+
+- Startup/shutdown hooks, `OnModuleInit`, `OnApplicationBootstrap`, `OnApplicationShutdown` -> [lifecycle](references/lifecycle.md)
+
+### Deployment and Scaling
+
+- Multi-process clustering, CPU core utilization, worker crash recovery -> [cluster](references/cluster.md)
+- Platform adapter, Node.js 22+ support, runtime detection -> [platform](references/platform.md)
 
 ### AI Application Modules (v2.0+)
 
@@ -166,4 +188,7 @@ Only load when the project explicitly requires microservice architecture:
 - Error handling follows framework patterns (HttpException, exception filters).
 - Optional modules are used only when requirements demand them.
 - Event listener classes using `@OnEvent` are registered in a module's `providers` (required for auto-scan in v1.9.0+).
+- **[v3]** WebSocket handlers use `IWebSocket<T>` (from `@dangao/bun-server`), NOT `ServerWebSocket<T>` from `bun`.
+- **[v3]** `app.getServer()` returns `IServerHandle | undefined`, NOT `Bun.Server | undefined`.
+- **[v3]** If targeting Node.js, verify `idleTimeout` and `reusePort` are not relied on (Bun-only; silently ignored on Node.js).
 - If something is not working, check [troubleshooting](references/troubleshooting.md).

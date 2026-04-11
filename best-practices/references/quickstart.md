@@ -2,7 +2,8 @@
 
 ## Prerequisites
 
-- Bun >= `1.3.10`
+- Bun >= `1.3.10` (or Node.js 22+ — see [Platform Adapter](platform.md))
+- `@dangao/bun-server` `v3.0.5`
 
 ## Critical Configuration
 
@@ -148,10 +149,32 @@ bun --cwd=packages/bun-server test
 ```typescript
 const app = new Application({
   port: 3100,                        // Default: 3000
+  platform: 'bun',                   // 'bun' | 'node' — default: auto-detect
   gracefulShutdownTimeout: 30000,    // Graceful shutdown timeout in ms (default: 30000)
   enableSignalHandlers: true,        // Listen for SIGTERM/SIGINT (default: true, set false in tests)
-  reusePort: false,                  // Enable SO_REUSEPORT for multi-process (Linux only)
+  reusePort: false,                  // Enable SO_REUSEPORT for multi-process (Bun/Linux only)
+  idleTimeout: 15000,                // TCP idle timeout in ms (Bun only; silently ignored on Node.js)
+  sseKeepAlive: {
+    enabled: true,                   // Auto-inject SSE heartbeats (default: true)
+    intervalMs: 15000,               // Heartbeat interval in ms (default: 15000)
+  },
 });
+```
+
+## Server Handle (v3)
+
+`app.getServer()` now returns `IServerHandle | undefined` (previously `Bun.Server | undefined`):
+
+```typescript
+import type { IServerHandle } from "@dangao/bun-server";
+
+const handle: IServerHandle | undefined = app.getServer();
+handle?.port;       // number
+handle?.hostname;   // string
+await handle?.stop();
+
+// Access raw native server (not recommended — type is unknown)
+const native: unknown = app.getNativeServer();
 ```
 
 ## Next Steps
@@ -160,4 +183,5 @@ const app = new Application({
 - [Controllers and Routing](controller-routing.md)
 - [Module System](module-system.md)
 - [Configuration](config.md)
+- [Platform Adapter (v3.0+)](platform.md)
 - [AI Modules (v2.0+)](ai.md)

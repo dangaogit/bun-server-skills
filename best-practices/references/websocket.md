@@ -1,5 +1,7 @@
 # Bun Server WebSocket
 
+> **v3 Breaking Change**: WebSocket client type is now `IWebSocket<T>` (from `@dangao/bun-server`) instead of Bun's `ServerWebSocket<T>`. This ensures compatibility across both Bun and Node.js platforms.
+
 ## Basic Gateway
 
 ```typescript
@@ -9,19 +11,20 @@ import {
   OnMessage,
   OnClose,
 } from "@dangao/bun-server";
+import type { IWebSocket } from "@dangao/bun-server";
 
 @WebSocketGateway("/ws")
 class ChatGateway {
-  private clients = new Set<ServerWebSocket>();
+  private clients = new Set<IWebSocket>();
 
   @OnOpen()
-  handleOpen(ws: ServerWebSocket) {
+  handleOpen(ws: IWebSocket) {
     this.clients.add(ws);
     console.log("Client connected, total:", this.clients.size);
   }
 
   @OnMessage()
-  handleMessage(ws: ServerWebSocket, message: string | Buffer) {
+  handleMessage(ws: IWebSocket, message: string | Buffer) {
     const text = typeof message === "string" ? message : message.toString();
     console.log("Received:", text);
 
@@ -32,7 +35,7 @@ class ChatGateway {
   }
 
   @OnClose()
-  handleClose(ws: ServerWebSocket) {
+  handleClose(ws: IWebSocket) {
     this.clients.delete(ws);
     console.log("Client disconnected, total:", this.clients.size);
   }
@@ -65,6 +68,7 @@ Store custom data per connection:
 
 ```typescript
 import { WebSocketConnectionData } from "@dangao/bun-server";
+import type { IWebSocket } from "@dangao/bun-server";
 
 interface UserConnectionData extends WebSocketConnectionData {
   userId: string;
@@ -75,7 +79,7 @@ interface UserConnectionData extends WebSocketConnectionData {
 @WebSocketGateway("/ws/chat")
 class ChatGateway {
   @OnOpen()
-  handleOpen(ws: ServerWebSocket<UserConnectionData>) {
+  handleOpen(ws: IWebSocket<UserConnectionData>) {
     // Set connection data
     ws.data.userId = generateId();
     ws.data.username = "Anonymous";
@@ -83,7 +87,7 @@ class ChatGateway {
   }
 
   @OnMessage()
-  handleMessage(ws: ServerWebSocket<UserConnectionData>, message: string) {
+  handleMessage(ws: IWebSocket<UserConnectionData>, message: string) {
     const { userId, username, room } = ws.data;
     console.log(`[${room}] ${username}: ${message}`);
   }
@@ -93,17 +97,19 @@ class ChatGateway {
 ## Room-based Chat
 
 ```typescript
+import type { IWebSocket } from "@dangao/bun-server";
+
 @WebSocketGateway("/ws/chat")
 class RoomChatGateway {
-  private rooms = new Map<string, Set<ServerWebSocket>>();
+  private rooms = new Map<string, Set<IWebSocket>>();
 
   @OnOpen()
-  handleOpen(ws: ServerWebSocket) {
+  handleOpen(ws: IWebSocket) {
     this.joinRoom(ws, "lobby");
   }
 
   @OnMessage()
-  handleMessage(ws: ServerWebSocket, message: string) {
+  handleMessage(ws: IWebSocket, message: string) {
     try {
       const data = JSON.parse(message);
 
@@ -128,13 +134,13 @@ class RoomChatGateway {
   }
 
   @OnClose()
-  handleClose(ws: ServerWebSocket) {
+  handleClose(ws: IWebSocket) {
     for (const [room, clients] of this.rooms) {
       clients.delete(ws);
     }
   }
 
-  private joinRoom(ws: ServerWebSocket, room: string) {
+  private joinRoom(ws: IWebSocket, room: string) {
     if (!this.rooms.has(room)) {
       this.rooms.set(room, new Set());
     }
@@ -142,7 +148,7 @@ class RoomChatGateway {
     ws.data.room = room;
   }
 
-  private leaveRoom(ws: ServerWebSocket, room: string) {
+  private leaveRoom(ws: IWebSocket, room: string) {
     this.rooms.get(room)?.delete(ws);
   }
 
@@ -161,6 +167,8 @@ class RoomChatGateway {
 ## With DI Services
 
 ```typescript
+import type { IWebSocket } from "@dangao/bun-server";
+
 @Injectable()
 class MessageService {
   async saveMessage(userId: string, text: string) {
@@ -173,9 +181,23 @@ class ChatGateway {
   constructor(private readonly messageService: MessageService) {}
 
   @OnMessage()
-  async handleMessage(ws: ServerWebSocket, message: string) {
+  async handleMessage(ws: IWebSocket, message: string) {
     await this.messageService.saveMessage(ws.data.userId, message);
   }
+}
+```
+
+## IWebSocket Interface
+
+`IWebSocket<T>` exposes the same core methods as Bun's `ServerWebSocket<T>` and works on both Bun and Node.js:
+
+```typescript
+interface IWebSocket<T = unknown> {
+  send(data: string | Buffer): void;
+  close(code?: number, reason?: string): void;
+  data: T;
+  readyState: number;
+  remoteAddress: string;
 }
 ```
 
@@ -206,3 +228,4 @@ ws.send(JSON.stringify({ type: "message", text: "Hello!" }));
 ## Related Resources
 
 - [WebSocket Chat Example](https://github.com/dangaogit/bun-server/blob/main/examples/03-advanced/websocket-chat-app.ts)
+- [Platform Adapter Guide](platform.md)
